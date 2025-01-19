@@ -26,9 +26,9 @@ public class ProductoControlador {
 
     // Cambiar la ruta para que coincida con el enlace en la vista
     @GetMapping("/nuevo") // Asegúrate de que la ruta sea "/productos/nuevo"
-    public String getFormulario(Model model) {
+    public String getFormularioCrear(Model model) {
         model.addAttribute("producto", new Producto());
-        return "formulario-producto";
+        return "formulario-crear-producto";
     }
 
     @PostMapping
@@ -51,6 +51,33 @@ public class ProductoControlador {
             return "detalle-producto";
         } else {
             model.addAttribute("mensaje", "Producto no encontrado");
+            return "error";
+        }
+    }
+    @GetMapping("/{id}/editar")
+    public String getFormularioEditar(@PathVariable("id") Long id, Model model) {
+        var productoOptional = repositorio.findById(id);
+        if (productoOptional.isPresent()) {
+            model.addAttribute("producto", productoOptional.get());
+            return "formulario-editar-producto";
+        } else {
+            model.addAttribute("mensaje", "Producto no encontrado");
+            return "error";
+        }
+    }
+
+    @PostMapping("/{id}/editar")
+    public String actualizarProducto(@PathVariable("id") Long id, @ModelAttribute("producto") Producto producto) {
+        var productoExistente = repositorio.findById(id);
+        if (productoExistente.isPresent()) {
+            Producto p = productoExistente.get();
+            p.setNombre(producto.getNombre());
+            p.setDescripcion(producto.getDescripcion());
+            p.setPrecio(producto.getPrecio());
+            p.setCantidad(producto.getCantidad());
+            repositorio.save(p);
+            return "redirect:/productos";
+        } else {
             return "error";
         }
     }
