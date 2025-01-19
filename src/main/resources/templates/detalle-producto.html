@@ -32,17 +32,17 @@
     <h2 class="text-center mb-4">Detalles del Producto</h2>
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
-            <!-- Detalles del producto -->
-            <div class="card">
+            <!-- Detalles del producto con una tarjeta simple -->
+            <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${producto.nombre}"></h5>
+                    <p class="card-text"><strong>Nombre:</strong> <span th:text="${producto.nombre}"></span></p>
                     <p class="card-text"><strong>Descripción:</strong> <span th:text="${producto.descripcion}"></span></p>
                     <p class="card-text"><strong>Precio:</strong> <span th:text="${producto.precio}"></span> €</p>
                     <p class="card-text"><strong>Cantidad:</strong> <span th:text="${producto.cantidad}"></span></p>
                 </div>
             </div>
 
-            <div class="mt-3 text-center">
+            <div class="mt-4 text-center">
                 <a href="/productos" class="btn btn-secondary">Volver al Listado</a>
             </div>
         </div>
