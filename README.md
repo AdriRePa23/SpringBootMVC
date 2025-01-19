@@ -1,6 +1,6 @@
 # Gestión de Productos
 
-Este proyecto es una aplicación web de **Gestión de Productos** construida con **Spring MVC** y **Thymeleaf**, que permite gestionar un catálogo de productos. Los usuarios pueden ver, crear, editar y eliminar productos a través de una interfaz web.
+Este proyecto es una aplicación web de **Gestión de Productos** construida con **Spring MVC** y **Thymeleaf**, que permite gestionar un catálogo de productos. Los usuarios pueden ver, crear, editar y eliminar productos a través de una interfaz web. **NO OFRECE PERSISTENCIA DE DATOS**.
 
 ---
 
@@ -46,8 +46,10 @@ Para ejecutar este proyecto, necesitarás tener instalado lo siguiente:
 
 ---
 
-## Instrucciones de instalación
+## Propuestas de Mejora
 
-1. **Clonar el repositorio**:
-   ```bash
-   git clone https://github.com/tu-usuario/gestion-de-productos.git
+- **Autenticación de usuarios:** Agregar un sistema de inicio de sesión para restringir el acceso a ciertas funciones.
+- **Paginación:** Agregar paginación a la lista de productos para manejar grandes cantidades de datos.
+- **Validación de formularios:** Mejorar la validación de los datos ingresados en el formulario para crear y editar productos.
+- **Persistencia de datos:** Añadir una capa de persistencia de datos con SQL, MongoDB, etc.
+
