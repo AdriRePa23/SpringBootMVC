@@ -54,7 +54,10 @@
                     <td>
                         <a th:href="@{/productos/{id}/detalles(id=${producto.id})}" class="btn btn-success btn-sm" role="button">Ver</a>
                         <a th:href="@{/productos/{id}/editar(id=${producto.id})}" class="btn btn-primary btn-sm" role="button">Editar</a>
-                        <a th:href="@{/productos/{id}/eliminar(id=${producto.id})}" class="btn btn-danger btn-sm" role="button">Eliminar</a>
+                        <a href="javascript:void(0);"
+                           th:onclick="|confirmarEliminacion(${producto.id})|"
+                           class="btn btn-danger btn-sm" role="button">Eliminar</a>
+
                     </td>
                 </tr>
                 </tbody>
@@ -70,6 +73,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+<script>
+    // Función para confirmar la eliminación de un producto
+    function confirmarEliminacion(id) {
+        // Mostramos el cuadro de confirmación
+        if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+            // Si el usuario confirma, redirigimos a la URL de eliminación
+            window.location.href = "/productos/" + id + "/eliminar";
+        }
+    }
+</script>
+
 </body>
 
 </html>
