@@ -9,16 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/productos")
+@RequestMapping("/productos") // Aquí tienes "/productos" como base
 public class ProductoControlador {
     private ProductoRepositorio repositorio;
+
     public ProductoControlador(ProductoRepositorio repositorio) {
         this.repositorio = repositorio;
     }
 
-    /*
-    GET http://localhost:8080/productos
-    */
     @GetMapping
     public String listarTodos(Model model) {
         List<Producto> productos = this.repositorio.findAll();
@@ -26,40 +24,34 @@ public class ProductoControlador {
         return "lista-productos";
     }
 
-    /*
-    GET http://localhost:8080/productos/nuevo
-    */
-    @GetMapping("/nuevo")
+    // Cambiar la ruta para que coincida con el enlace en la vista
+    @GetMapping("/nuevo") // Asegúrate de que la ruta sea "/productos/nuevo"
     public String getFormulario(Model model) {
-        model.addAttribute("productos", new Producto());
+        model.addAttribute("producto", new Producto());
         return "formulario-producto";
     }
 
-    /*
-    GET http://localhost:8080/productos
-    */
     @PostMapping
     public String crearProducto(@ModelAttribute("producto") Producto producto) {
-        this.repositorio.save(producto);
-        return "redirect:/productos";
+        try {
+            this.repositorio.save(producto);
+            return "redirect:/productos"; // Redirige a la lista después de guardar
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";  // Puedes redirigir a una página de error o mostrar un mensaje de error
+        }
     }
 
-    /*
-    GET http://localhost:8080/productos/{id}/detalles
-    */
     @GetMapping("/{id}/detalles")
     public String verProducto(@PathVariable("id") Long id, Model model) {
         var productoOptional = repositorio.findById(id);
 
         if (productoOptional.isPresent()) {
             model.addAttribute("producto", productoOptional.get());
-            return "detalle-producto";  // Vista para los detalles del producto
+            return "detalle-producto";
         } else {
             model.addAttribute("mensaje", "Producto no encontrado");
-            return "error";  // Vista de error si no se encuentra el producto
+            return "error";
         }
     }
-
-
-
 }

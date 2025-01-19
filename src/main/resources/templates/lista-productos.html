@@ -23,9 +23,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/productos/nuevo">Nuevo Producto</a>
-                </li>
             </ul>
         </div>
     </div>
@@ -49,20 +46,23 @@
                 </thead>
                 <tbody>
                 <tr th:each="producto : ${productos}">
-                    <th scope="row" th:text="${producto.getId()}"></th>
-                    <td th:text="${producto.getNombre()}"></td>
-                    <td th:text="${producto.getDescripcion()}"></td>
-                    <td th:text="${producto.getPrecio()}"></td>
-                    <td th:text="${producto.getCantidad()}"></td>
+                    <th scope="row" th:text="${producto.id}"></th>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.descripcion}"></td>
+                    <td th:text="${producto.precio}"></td>
+                    <td th:text="${producto.cantidad}"></td>
                     <td>
                         <a th:href="@{/productos/{id}/detalles(id=${producto.id})}" class="btn btn-success btn-sm" role="button">Ver</a>
                         <a th:href="@{/productos/{id}/editar(id=${producto.id})}" class="btn btn-primary btn-sm" role="button">Editar</a>
                         <a th:href="@{/productos/{id}/eliminar(id=${producto.id})}" class="btn btn-danger btn-sm" role="button">Eliminar</a>
-
                     </td>
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="col-12 col-md-10">
+            <a th:href="@{/productos/nuevo}" class="btn btn-primary">Nuevo Producto</a>
+
         </div>
     </div>
 </div>
